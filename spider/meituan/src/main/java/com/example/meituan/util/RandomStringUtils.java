@@ -1,4 +1,4 @@
-package com.example.meituan;
+package com.example.meituan.util;
 
 
 import org.springframework.util.StringUtils;
