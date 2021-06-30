@@ -1,8 +1,9 @@
-package com.example.meituan.vo;
+package com.example.meituan.vo.roomtype;
 
 import lombok.Data;
 
-public @Data class GoodsRoomModelsItem{
+@Data
+public class GoodsRoomModelsItem{
 	private int goodsId;
 	private int partnerId;
 	private int poiId;

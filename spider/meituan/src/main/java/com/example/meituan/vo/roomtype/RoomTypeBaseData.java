@@ -1,9 +1,10 @@
-package com.example.meituan.vo;
+package com.example.meituan.vo.roomtype;
+
+import lombok.Data;
 
 import java.util.List;
-import lombok.Data;
 @Data
-public  class BaseData{
+public class RoomTypeBaseData {
 	private List<RoomType> result;
 	private String traceId;
 	private boolean highRateStarHotel;

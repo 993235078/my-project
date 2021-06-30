@@ -1,7 +1,8 @@
-package com.example.meituan.vo;
+package com.example.meituan.vo.roomtype;
+
+import lombok.Data;
 
 import java.util.List;
-import lombok.Data;
 @Data
 public class RoomType{
 	private String buyInfo;

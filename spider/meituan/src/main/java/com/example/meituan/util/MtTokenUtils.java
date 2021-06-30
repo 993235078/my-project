@@ -6,11 +6,23 @@ import org.apache.commons.codec.binary.Base64;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Objects;
 import java.util.zip.DeflaterOutputStream;
 import java.util.zip.InflaterOutputStream;
 
-public class MtTokenUtils {
+public class MtTokenUtils<T> {
+
+
+    public String getMtTokenV2(T t) {
+        String dataForSign = t.toString();
+        String sign = compressData(dataForSign);
+        String data = "{\"rId\":100004,\"ver\":\"1.0.6\",\"brVD\":[1920,211],\"brR\":[[1920,1080],[1920,1040],24,24],\"bI\":[\"https://i.meituan.com/awp/h5/hotel\",\"\"],\"mT\":[],\"kT\":[],\"aT\":[],\"tT\":[],\"aM\":\"\"}";
+        JSONObject jsonObject = JSON.parseObject(data);
+        jsonObject.put("ts", System.currentTimeMillis());
+        jsonObject.put("cts", System.currentTimeMillis() + 10000);
+        jsonObject.put("sign", sign);
+        return compressData(jsonObject.toJSONString());
+    }
+
 
     public static String getMtToken(String poiId, String start, String end) {
         String dataForSign = "\"cityId=57&" +
@@ -69,4 +81,8 @@ public class MtTokenUtils {
         return null;
     }
 
+
+    public static void main(String[] args) {
+        System.out.println(getMtToken("998015510", "1625011200000", "1625241600000"));
+    }
 }

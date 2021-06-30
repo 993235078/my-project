@@ -5,7 +5,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.example.meituan.forest.HotelService;
 import com.example.meituan.util.MtTokenUtils;
 import com.example.meituan.vo.QueryHotelRoomTypeVo;
-import com.example.meituan.vo.ResponseBase;
+import com.example.meituan.vo.roomtype.RoomTypeResponseBase;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -35,9 +35,9 @@ public class TestTask {
             System.out.println(error.toString());
         });
         System.out.println("返回解析的结果为：");
-        ResponseBase responseBase = JSON.parseObject(baseDataResponseBase, new TypeReference<ResponseBase>() {
+        RoomTypeResponseBase roomTypeResponseBase = JSON.parseObject(baseDataResponseBase, new TypeReference<RoomTypeResponseBase>() {
         });
-        System.out.println(responseBase);
+        System.out.println(roomTypeResponseBase);
     }
 
 
