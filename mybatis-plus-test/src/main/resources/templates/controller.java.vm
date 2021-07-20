@@ -1,0 +1,137 @@
+package ${package.Controller};
+
+import ${package.Service}.${table.serviceName};
+import ${package.Entity}.${entity};
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+#if(${restControllerStyle})
+import org.springframework.web.bind.annotation.RestController;
+#else
+import org.springframework.stereotype.Controller;
+#end
+#if(${superControllerClassPackage})
+import ${superControllerClassPackage};import javax.annotation.Resource;
+#end
+
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
+import javax.annotation.Resource;
+import javax.validation.Valid;
+import java.util.List;
+
+/**
+ * <p>
+ * $!{table.comment} 前端控制器
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${restControllerStyle})
+@RestController
+#else
+@Controller
+#end
+@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
+#if(${kotlin})
+class ${table.controllerName}#if(${superControllerClass}) : ${superControllerClass}()#end
+
+#else
+#if(${superControllerClass})
+public class ${table.controllerName} extends ${superControllerClass} {
+#else
+public class ${table.controllerName} {
+#end
+
+    @Resource
+    private ${table.serviceName} ${table.entityPath}Service;
+
+
+    @GetMapping("/list/{page}/{limit}")
+    @ApiOperation("查询列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "页码", required = true, dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "limit", value = "每页数量", required = true, dataType = "int", paramType = "path")
+    })
+    public DataResult<List<${entity}>> hotelList (
+            @PathVariable("page") Integer page,
+            @PathVariable("limit") Integer limit
+    ){
+        Page<${entity}> result = ${table.entityPath}Service.page(new Page<>(page, limit), Wrappers.<${entity}>lambdaQuery());
+        return new DataResult<>(result.getTotal(), 200, result.getRecords(), "success");
+    }
+
+
+    /**
+     * 根据主键查询详情
+     *
+     * @param code 主键
+     * @return com.wxay.xhotel.wxaydiscountserver.entity.profit.Hotel
+     * @author Irvin
+     * @date 2021/5/19
+     */
+    @GetMapping("/{code}")
+    @ApiOperation("查询酒店详情")
+    @ApiImplicitParam(name = "code", value = "主键", required = true, dataType = "string", paramType = "path")
+    public DataResult<${entity}> info(@PathVariable("code") String code) {
+        return new DataResult<>(0, 200, ${table.entityPath}Service.getById(code), "success");
+    }
+
+
+    /**
+     * 新增
+     *
+     * @param createVo 数据对象
+     * @return base.DataResult<java.lang.Boolean>
+     * @author Irvin
+     * @date 2021/5/19
+     */
+    @PostMapping
+    @ApiOperation("新增")
+    public DataResult<Boolean> create(@RequestBody @Valid ${entity}CreateVo createVo) {
+        ${entity} save = new ${entity}();
+        BeanUtils.copyProperties(createVo, save);
+        return DataResult.getBooleanResultForUpd(${table.entityPath}Service.save(save));
+    }
+
+
+    /**
+     * 修改
+     *
+     * @param updateVo 数据对象
+     * @return base.DataResult<java.lang.Boolean>
+     * @author Irvin
+     * @date 2021/5/19
+     */
+    @PutMapping
+    @ApiOperation("修改")
+    public DataResult<Boolean> update(@RequestBody @Valid ${entity}UpdateVo updateVo) {
+        ${entity} save = new ${entity}();
+        BeanUtils.copyProperties(updateVo, save);
+        return DataResult.getBooleanResultForUpd(${table.entityPath}Service.updateById(save));
+    }
+
+
+    /**
+     * 删除
+     *
+     * @param code 主键
+     * @return base.DataResult<java.lang.Boolean>
+     * @author Irvin
+     * @date 2021/5/19
+     */
+    @DeleteMapping("/{code}")
+    @ApiOperation("根据主键删除")
+    @ApiImplicitParam(name = "code", value = "主键", required = true, dataType = "string", paramType = "path")
+    public DataResult<Boolean> delete(@PathVariable("code") String code) {
+        ${entity} save = new ${entity}();
+        save.setDeleteFlag(1);
+        return DataResult.getBooleanResultForUpd(${table.entityPath}Service.updateById(save));
+    }
+
+}
+
+#end

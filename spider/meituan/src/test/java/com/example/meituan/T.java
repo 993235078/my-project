@@ -25,7 +25,7 @@ public class T {
         String token = compressData(jsonObject.toJSONString());
         System.out.println(token);*/
         //System.out.println(getMtToken("4764214", "1624492800000", "1624579200000"));
-        String token = "AwQAAABJAgAAAAEAAAAyAAAAPLgC95WH3MyqngAoyM/hf1hEoKrGdo0pJ5DI44e1wGF9AT3PH7Wes03actC2n/GVnwfURonD78PewMUppAAAADhIoYKtW/Mi1gkaVUrDXnRACW2ahT8+S7tIkYkJzUa46x+rzImN97j0ms0fcn4aFfBu614aoWJMHA=";
+        String token = "eJyVk1tvqzgUhf8LD31JVIxtbFwpGoUQEnIPoWmbo6MIAk0I14Ahl9H89zGRypzXsZD4WF572XtL/C0Vli+9KUAs3JXqoJDeJOUVvBKpK/FS7BBIxAKAQE0YDn9qDCENdiWv2BrS2y8FYtLVgPa7UWwh/FIYBF0FaOB394exYIjF07gsYZJOnOflmyyHr0kQ8spNXw9ZIrvXXD6p8injQSznWSj7gRu/nngS/yW+LL9HVYVigJDycgj5XQgqfSm5W3AnTILe84Yq1Jq2wEuQ+q1KkbjIUz3wvYjqicaY8GkIYAIQxpBqGtEUrCIFqgRTDDVGobo/kH2gIFWjQAEKpAiITYiYsnfTKo73mbL3n7cVmdw9evtIzBS+8Hsuzn15xGbsHnu8qAIx1//dchmUZZil+0sVFPeeIonhJU4zPIRgl2BVZCKEWiKCyJO0ltgPYdxS68OtT1VaQi21FaraUlur0pb+S2lPI6ClNpnAltozSJtMmjz6JPZDFLSEW2p2tYY01FKjsYaY8KngSexJYmRRMzLxdv8cXfd9JlwiAouWNsOBYy0XQiBQhKqwa1jbppT/lM7F7yG2y/CYCgomt+37ltfw3v+SN6yDR8mkWqT9iU5IEdWO81HRKo7Ixy5b7zLsmbfzkfMEyA8a2lNEbukBx5gZmeOPPPUbZiAffWVn25hZu2EyGMy0b6CXhzUxKI8voBz5uuHB+8Vn1FKHLluurWIIZ3Wh24NH/zNLR/ysnufWVDtNtye43nxt+2pnlYesc4xC++oU86tBXWewGKp4ZxvG5U4hr0dxfx7pJjF3Q2Qto8wu0uOkXtZoutmGpj4dHPvyUljrtPY/tYQ53sSRK+eD5umpvkETK7d1hy2KqNwkQ7O6R6vTgXh5p7a9M4a1Mk0BiTwrn2+AmZfwmuLsMQgTfakPptdrrPffs2SymKF8conAjQf9r8XmGoxXtjnWKuZ/rEq5ouSxYsGs7qxn8sNMiOzpLn0QTu8A07QYjFUZ34pZbtTjHRycGfGPgTdBil10uI7Girea6HY44bBe5yst+rgXJFrey91ha+CAfbP+fMbGwyuT9ci80nD0eTqNE75cb/VkDrKDxq04j6PFOFw9dttiGvWkf/4FMVF0Qg==";
         //token = URLUtils.getURLDecoderString(token);
         System.out.println("原本的token");
         System.out.println(token);
