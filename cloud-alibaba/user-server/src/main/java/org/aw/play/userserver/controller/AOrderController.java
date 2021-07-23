@@ -1,53 +1,38 @@
-package ${package.Controller};
+package org.aw.play.userserver.controller;
 
-import ${package.Service}.${table.serviceName};
-import ${package.Entity}.${entity};
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-#if(${restControllerStyle})
-import org.springframework.web.bind.annotation.RestController;
-#else
-import org.springframework.stereotype.Controller;
-#end
-#if(${superControllerClassPackage})
-import ${superControllerClassPackage};import javax.annotation.Resource;
-#end
-
+import base.DataResult;
+import base.IDUtils;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.aw.play.userserver.entity.AOrder;
+import org.aw.play.userserver.entity.AOrderCreateVo;
+import org.aw.play.userserver.entity.AOrderUpdateVo;
+import org.aw.play.userserver.service.AOrderService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
 
 /**
  * <p>
- * $!{table.comment} 前端控制器
+ *  前端控制器
  * </p>
  *
- * @author ${author}
- * @since ${date}
+ * @author Irvin
+ * @since 2021-07-23
  */
-#if(${restControllerStyle})
 @RestController
-#else
-@Controller
-#end
-@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
-#if(${kotlin})
-class ${table.controllerName}#if(${superControllerClass}) : ${superControllerClass}()#end
-
-#else
-#if(${superControllerClass})
-public class ${table.controllerName} extends ${superControllerClass} {
-#else
-public class ${table.controllerName} {
-#end
+@RequestMapping("/a-order")
+public class AOrderController {
 
     @Resource
-    private ${table.serviceName} ${table.entityPath}Service;
+    private AOrderService aOrderService;
 
 
     @GetMapping("/list/{page}/{limit}")
@@ -56,11 +41,11 @@ public class ${table.controllerName} {
             @ApiImplicitParam(name = "page", value = "页码", required = true, dataType = "int", paramType = "path"),
             @ApiImplicitParam(name = "limit", value = "每页数量", required = true, dataType = "int", paramType = "path")
     })
-    public DataResult<List<${entity}>> hotelList (
+    public DataResult<List<AOrder>> hotelList (
             @PathVariable("page") Integer page,
             @PathVariable("limit") Integer limit
     ){
-        IPage<${entity}> result = ${table.entityPath}Service.page(new Page<>(page, limit), Wrappers.<${entity}>lambdaQuery());
+        IPage<AOrder> result = aOrderService.page(new Page<>(page, limit), Wrappers.<AOrder>lambdaQuery());
         return new DataResult<>(result.getTotal(), 200, result.getRecords(), "success");
     }
 
@@ -76,8 +61,8 @@ public class ${table.controllerName} {
     @GetMapping("/{code}")
     @ApiOperation("查询酒店详情")
     @ApiImplicitParam(name = "code", value = "主键", required = true, dataType = "string", paramType = "path")
-    public DataResult<${entity}> info(@PathVariable("code") String code) {
-        return new DataResult<>(0, 200, ${table.entityPath}Service.getById(code), "success");
+    public DataResult<AOrder> info(@PathVariable("code") String code) {
+        return new DataResult<>(0, 200, aOrderService.getById(code), "success");
     }
 
 
@@ -91,10 +76,11 @@ public class ${table.controllerName} {
      */
     @PostMapping
     @ApiOperation("新增")
-    public DataResult<Boolean> create(@RequestBody @Valid ${entity}CreateVo createVo) {
-        ${entity} save = new ${entity}();
+    public DataResult<Boolean> create(@RequestBody @Valid AOrderCreateVo createVo) {
+        AOrder save = new AOrder();
+        save.setOrderCode(IDUtils.getId());
         BeanUtils.copyProperties(createVo, save);
-        return DataResult.getBooleanResultForUpd(${table.entityPath}Service.save(save));
+        return DataResult.getBooleanResultForUpd(aOrderService.save(save));
     }
 
 
@@ -108,10 +94,10 @@ public class ${table.controllerName} {
      */
     @PutMapping
     @ApiOperation("修改")
-    public DataResult<Boolean> update(@RequestBody @Valid ${entity}UpdateVo updateVo) {
-        ${entity} save = new ${entity}();
+    public DataResult<Boolean> update(@RequestBody @Valid AOrderUpdateVo updateVo) {
+        AOrder save = new AOrder();
         BeanUtils.copyProperties(updateVo, save);
-        return DataResult.getBooleanResultForUpd(${table.entityPath}Service.updateById(save));
+        return DataResult.getBooleanResultForUpd(aOrderService.updateById(save));
     }
 
 
@@ -127,11 +113,11 @@ public class ${table.controllerName} {
     @ApiOperation("根据主键删除")
     @ApiImplicitParam(name = "code", value = "主键", required = true, dataType = "string", paramType = "path")
     public DataResult<Boolean> delete(@PathVariable("code") String code) {
-        ${entity} save = new ${entity}();
+        AOrder save = new AOrder();
+        save.setUserCode(code);
         save.setDeleteFlag(1);
-        return DataResult.getBooleanResultForUpd(${table.entityPath}Service.updateById(save));
+        return DataResult.getBooleanResultForUpd(aOrderService.updateById(save));
     }
 
 }
 
-#end

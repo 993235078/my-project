@@ -1,0 +1,31 @@
+server:
+  servlet:
+    context-path: /api
+  port: 10009
+  undertow:
+    threads:
+      io: 4
+      worker: 20
+    buffer-size: 1024
+    direct-buffers: true
+
+spring:
+  application:
+    name: api
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.20.155:8848
+  #输出时间格式化
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+#超时时间设置
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 60000
+        readTimeout: 60000
+        loggerLevel: basic

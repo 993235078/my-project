@@ -25,10 +25,10 @@ public class GenteratorCode {
         AutoGenerator mpg = new AutoGenerator();
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        String originalProjectPath = "C:\\Irvin\\Dev\\IdeaProjects\\my-project\\mybatis-plus-test\\src\\main";
+        String originalProjectPath = "C:\\Irvin\\Dev\\IdeaProjects\\my-project\\cloud-alibaba\\user-server\\src\\main";
         String projectPath = originalProjectPath + "\\java";
-        String parentPath = "\\com\\aw\\play\\mybatisplustest";
-        String parentRe = "com.aw.play.mybatisplustest";
+        String parentPath = "\\org\\aw\\play\\userserver";
+        String parentRe = "org.aw.play.userserver";
         gc.setOutputDir(projectPath);
         gc.setFileOverride(true);
         gc.setSwagger2(true);
@@ -68,9 +68,9 @@ public class GenteratorCode {
         });*/
 
         dsc.setDriverName("com.mysql.jdbc.Driver");
-        dsc.setUrl("jdbc:mysql://47.101.209.81:3306/wxay_platform?characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false");
+        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/test_tran?characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false");
         dsc.setUsername("root");
-        dsc.setPassword("wxay2020@)@)");
+        dsc.setPassword("123456");
         mpg.setDataSource(dsc);
 
         // 策略配置
@@ -86,7 +86,7 @@ public class GenteratorCode {
         // 驼峰转连字符 如 umps_user 变为 upms/user
         strategy.setControllerMappingHyphenStyle(true);
         // 需要生成的表
-        strategy.setInclude("pla_hotel_sxf_config");
+        strategy.setInclude("a_order");
         //strategy.setExclude(new String[]{"test"}); // 排除生成的表
         mpg.setStrategy(strategy);
         PackageConfig pc = new PackageConfig();
