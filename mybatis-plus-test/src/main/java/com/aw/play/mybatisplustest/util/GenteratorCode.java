@@ -86,7 +86,7 @@ public class GenteratorCode {
         // 驼峰转连字符 如 umps_user 变为 upms/user
         strategy.setControllerMappingHyphenStyle(true);
         // 需要生成的表
-        strategy.setInclude("xhotel_sxf_base_params");
+        strategy.setInclude("xhotel_app_order_account");
         //strategy.setExclude(new String[]{"test"}); // 排除生成的表
         mpg.setStrategy(strategy);
         PackageConfig pc = new PackageConfig();

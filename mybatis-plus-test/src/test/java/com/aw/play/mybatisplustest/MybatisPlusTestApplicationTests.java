@@ -6,7 +6,6 @@ import cn.smallbun.screw.core.engine.EngineFileType;
 import cn.smallbun.screw.core.engine.EngineTemplateType;
 import cn.smallbun.screw.core.execute.DocumentationExecute;
 import cn.smallbun.screw.core.process.ProcessConfig;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
@@ -23,7 +22,7 @@ class MybatisPlusTestApplicationTests {
     ApplicationContext applicationContext;
 
 
-    @Test
+    //@Test
     void contextLoads() {
         DataSource dataSourceMysql = applicationContext.getBean(DataSource.class);
         // 生成文件配置
