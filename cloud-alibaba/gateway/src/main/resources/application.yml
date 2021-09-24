@@ -14,9 +14,21 @@ spring:
           enabled: true
           lowerCaseServiceId: true
       routes:
-        - id: mt
-          uri: lb://spider-mt-server
-          predicates:
-            - Path=/mt/**
+#        - id: mt
+#          uri: lb://spider-mt-server
+#          predicates:
+#            - Path=/mt/**
           #filters:
+            #- StripPrefix=1
+        - id: order
+          uri: lb://order-server
+          predicates:
+            - Path=/o/**
+            #filters:
+            #- StripPrefix=1
+        - id: user
+          uri: lb://user-server
+          predicates:
+            - Path=/u/**
+            #filters:
             #- StripPrefix=1
