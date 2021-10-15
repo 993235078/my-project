@@ -25,13 +25,14 @@ public class GenteratorCode {
         AutoGenerator mpg = new AutoGenerator();
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        String originalProjectPath = "C:\\Irvin\\Dev\\IdeaProjects\\wxay-product-server\\xhotel-order-server\\src\\main";
+        String originalProjectPath = "C:\\Irvin\\Dev\\IdeaProjects\\wxay-product-server\\xhotel-base-server\\src\\main";
         String projectPath = originalProjectPath + "\\java";
-        String parentPath = "\\com\\wxay\\xhotel\\xhotelorderserver";
-        String parentRe = "com.wxay.xhotel.xhotelorderserver";
+        String parentPath = "\\com\\wxay\\xhotel\\xhotelbaseserver";
+        String parentRe = "com.wxay.xhotel.xhotelbaseserver";
         gc.setOutputDir(projectPath);
         gc.setFileOverride(true);
         gc.setSwagger2(true);
+        //开启 ActiveRecord 模式 充血模型 实体自带持久化功能
         gc.setActiveRecord(false);
         // XML 二级缓存
         gc.setEnableCache(false);
@@ -86,7 +87,7 @@ public class GenteratorCode {
         // 驼峰转连字符 如 umps_user 变为 upms/user
         strategy.setControllerMappingHyphenStyle(true);
         // 需要生成的表
-        strategy.setInclude("xhotel_app_order_account");
+        strategy.setInclude("work_user_behavior_record");
         //strategy.setExclude(new String[]{"test"}); // 排除生成的表
         mpg.setStrategy(strategy);
         PackageConfig pc = new PackageConfig();
