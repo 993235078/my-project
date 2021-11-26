@@ -2,6 +2,7 @@ package ${package.Controller};
 
 import ${package.Service}.${table.serviceName};
 import ${package.Entity}.${entity};
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -50,17 +51,17 @@ public class ${table.controllerName} {
     private ${table.serviceName} ${table.entityPath}Service;
 
 
-    @GetMapping("/list/{page}/{limit}")
+    @GetMapping("/list")
     @ApiOperation("查询列表")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page", value = "页码", required = true, dataType = "int", paramType = "path"),
-            @ApiImplicitParam(name = "limit", value = "每页数量", required = true, dataType = "int", paramType = "path")
+            @ApiImplicitParam(name = "pageNum", value = "页码", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "pageSize", value = "每页数量", required = true, dataType = "int", paramType = "query")
     })
-    public DataResult<List<${entity}>> hotelList (
-            @PathVariable("page") Integer page,
-            @PathVariable("limit") Integer limit
+    public DataResult<List<${entity}>> list (
+        @RequestParam(value = "pageNum") Integer pageNum,
+        @RequestParam(value = "pageSize") Integer pageSize
     ){
-        IPage<${entity}> result = ${table.entityPath}Service.page(new Page<>(page, limit), Wrappers.<${entity}>lambdaQuery());
+        IPage<${entity}> result = ${table.entityPath}Service.page(new Page<>(pageNum, pageSize), Wrappers.<${entity}>lambdaQuery());
         return new DataResult<>(result.getTotal(), 200, result.getRecords(), "success");
     }
 
@@ -68,16 +69,16 @@ public class ${table.controllerName} {
     /**
      * 根据主键查询详情
      *
-     * @param code 主键
+     * @param id 主键
      * @return com.wxay.xhotel.wxaydiscountserver.entity.profit.Hotel
      * @author Irvin
      * @date 2021/5/19
      */
-    @GetMapping("/{code}")
-    @ApiOperation("查询酒店详情")
-    @ApiImplicitParam(name = "code", value = "主键", required = true, dataType = "string", paramType = "path")
-    public DataResult<${entity}> info(@PathVariable("code") String code) {
-        return new DataResult<>(0, 200, ${table.entityPath}Service.getById(code), "success");
+    @GetMapping("/{id}")
+    @ApiOperation("查询详情")
+    @ApiImplicitParam(name = "id", value = "主键", required = true, dataType = "string", paramType = "path")
+    public DataResult<${entity}> info(@PathVariable("id") String id) {
+        return new DataResult<>(0, 200, ${table.entityPath}Service.getById(id), "success");
     }
 
 
@@ -118,15 +119,15 @@ public class ${table.controllerName} {
     /**
      * 删除
      *
-     * @param code 主键
+     * @param id 主键
      * @return base.DataResult<java.lang.Boolean>
      * @author Irvin
      * @date 2021/5/19
      */
-    @DeleteMapping("/{code}")
+    @DeleteMapping("/{id}")
     @ApiOperation("根据主键删除")
-    @ApiImplicitParam(name = "code", value = "主键", required = true, dataType = "string", paramType = "path")
-    public DataResult<Boolean> delete(@PathVariable("code") String code) {
+    @ApiImplicitParam(name = "id", value = "主键", required = true, dataType = "string", paramType = "path")
+    public DataResult<Boolean> delete(@PathVariable("id") String id) {
         ${entity} save = new ${entity}();
         save.setDeleteFlag(1);
         return DataResult.getBooleanResultForUpd(${table.entityPath}Service.updateById(save));

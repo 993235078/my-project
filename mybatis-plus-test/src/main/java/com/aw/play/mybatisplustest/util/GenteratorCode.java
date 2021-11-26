@@ -25,10 +25,10 @@ public class GenteratorCode {
         AutoGenerator mpg = new AutoGenerator();
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        String originalProjectPath = "C:\\Irvin\\Dev\\IdeaProjects\\wxay-product-server\\xhotel-base-server\\src\\main";
+        String originalProjectPath = "C:\\dev\\ideaWorkSpace\\here-server\\res-server\\src\\main";
         String projectPath = originalProjectPath + "\\java";
-        String parentPath = "\\com\\wxay\\xhotel\\xhotelbaseserver";
-        String parentRe = "com.wxay.xhotel.xhotelbaseserver";
+        String parentPath = "\\com\\wykj\\here\\resserver";
+        String parentRe = "com.wykj.here.resserver";
         gc.setOutputDir(projectPath);
         gc.setFileOverride(true);
         gc.setSwagger2(true);
@@ -43,7 +43,7 @@ public class GenteratorCode {
         gc.setBaseColumnList(true);
         gc.setAuthor("Irvin");
         //主键策略
-        gc.setIdType(IdType.ASSIGN_UUID);
+        gc.setIdType(IdType.AUTO);
         // 自定义文件命名，注意 %s 会自动填充表实体属性！
         gc.setMapperName("%sMapper");
         gc.setXmlName("%sMapper");
@@ -69,9 +69,9 @@ public class GenteratorCode {
         });*/
 
         dsc.setDriverName("com.mysql.jdbc.Driver");
-        dsc.setUrl("jdbc:mysql://47.101.209.81:3306/wxay_platform?characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false");
+        dsc.setUrl("jdbc:mysql://47.99.125.113:3306/here_community?characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false");
         dsc.setUsername("root");
-        dsc.setPassword("wxay2020@)@)");
+        dsc.setPassword("qwezxc890");
         mpg.setDataSource(dsc);
 
         // 策略配置
@@ -87,7 +87,7 @@ public class GenteratorCode {
         // 驼峰转连字符 如 umps_user 变为 upms/user
         strategy.setControllerMappingHyphenStyle(true);
         // 需要生成的表
-        strategy.setInclude("work_user_behavior_record");
+        strategy.setInclude("res_script","res_script_category","res_script_score","res_script_store_associate","res_script_tag","res_store");
         //strategy.setExclude(new String[]{"test"}); // 排除生成的表
         mpg.setStrategy(strategy);
         PackageConfig pc = new PackageConfig();
