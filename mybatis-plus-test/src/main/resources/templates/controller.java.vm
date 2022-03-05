@@ -70,7 +70,7 @@ public class ${table.controllerName} {
      * 根据主键查询详情
      *
      * @param id 主键
-     * @return com.wxay.xhotel.wxaydiscountserver.entity.profit.Hotel
+     * @return 详情
      * @author Irvin
      * @date 2021/5/19
      */
@@ -85,16 +85,16 @@ public class ${table.controllerName} {
     /**
      * 新增
      *
-     * @param createVo 数据对象
+     * @param createDto 数据对象
      * @return base.DataResult<java.lang.Boolean>
      * @author Irvin
      * @date 2021/5/19
      */
     @PostMapping
     @ApiOperation("新增")
-    public DataResult<Boolean> create(@RequestBody @Valid ${entity}CreateVo createVo) {
+    public DataResult<Boolean> create(@RequestBody @Valid ${entity}CreateDto createDto) {
         ${entity} save = new ${entity}();
-        BeanUtils.copyProperties(createVo, save);
+        BeanUtils.copyProperties(createDto, save);
         return DataResult.getBooleanResultForUpd(${table.entityPath}Service.save(save));
     }
 
@@ -102,16 +102,16 @@ public class ${table.controllerName} {
     /**
      * 修改
      *
-     * @param updateVo 数据对象
+     * @param updateDto 数据对象
      * @return base.DataResult<java.lang.Boolean>
      * @author Irvin
      * @date 2021/5/19
      */
     @PutMapping
     @ApiOperation("修改")
-    public DataResult<Boolean> update(@RequestBody @Valid ${entity}UpdateVo updateVo) {
+    public DataResult<Boolean> update(@RequestBody @Valid ${entity}UpdateDto updateDto) {
         ${entity} save = new ${entity}();
-        BeanUtils.copyProperties(updateVo, save);
+        BeanUtils.copyProperties(updateDto, save);
         return DataResult.getBooleanResultForUpd(${table.entityPath}Service.updateById(save));
     }
 

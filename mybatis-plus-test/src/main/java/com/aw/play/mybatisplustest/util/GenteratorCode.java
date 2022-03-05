@@ -25,10 +25,14 @@ public class GenteratorCode {
         AutoGenerator mpg = new AutoGenerator();
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        String originalProjectPath = "C:\\dev\\ideaWorkSpace\\here-server\\res-server\\src\\main";
+        /*String originalProjectPath = "C:\\dev\\ideaWorkSpace\\here-server\\res-server\\src\\main";
         String projectPath = originalProjectPath + "\\java";
         String parentPath = "\\com\\wykj\\here\\resserver";
-        String parentRe = "com.wykj.here.resserver";
+        String parentRe = "com.wykj.here.resserver";*/
+        String originalProjectPath = "C:\\dev\\ideaWorkSpace\\here-server\\job\\src\\main";
+        String projectPath = originalProjectPath + "\\java";
+        String parentPath = "\\com\\wykj\\here\\job";
+        String parentRe = "com.wykj.here.job";
         gc.setOutputDir(projectPath);
         gc.setFileOverride(true);
         gc.setSwagger2(true);
@@ -36,7 +40,7 @@ public class GenteratorCode {
         gc.setActiveRecord(false);
         // XML 二级缓存
         gc.setEnableCache(false);
-        gc.setDateType(DateType.ONLY_DATE);
+        //gc.setDateType(DateType.ONLY_DATE);
         // XML ResultMap
         gc.setBaseResultMap(true);
         // XML columList
@@ -87,7 +91,7 @@ public class GenteratorCode {
         // 驼峰转连字符 如 umps_user 变为 upms/user
         strategy.setControllerMappingHyphenStyle(true);
         // 需要生成的表
-        strategy.setInclude("res_script","res_script_category","res_script_score","res_script_store_associate","res_script_tag","res_store");
+        strategy.setInclude("res_advertise");
         //strategy.setExclude(new String[]{"test"}); // 排除生成的表
         mpg.setStrategy(strategy);
         PackageConfig pc = new PackageConfig();
@@ -126,7 +130,7 @@ public class GenteratorCode {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + parentPath +"\\vo\\" + pc.getModuleName() + tableInfo.getEntityName() + "CreateVo.java";
+                return projectPath + parentPath +"\\vo\\" + pc.getModuleName() + tableInfo.getEntityName() + "CreateDto.java";
             }
         });
 
@@ -135,7 +139,7 @@ public class GenteratorCode {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + parentPath +"\\vo\\" + pc.getModuleName() + tableInfo.getEntityName() + "UpdateVo.java";
+                return projectPath + parentPath +"\\vo\\" + pc.getModuleName() + tableInfo.getEntityName() + "UpdateDto.java";
             }
         });
 

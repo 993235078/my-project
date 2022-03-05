@@ -45,7 +45,7 @@ public class ${entity} extends ${superEntityClass}#if(${activeRecord})<${entity}
 #elseif(${activeRecord})
 public class ${entity} extends Model<${entity}> {
 #else
-public class ${entity}CreateVo implements Serializable {
+public class ${entity}CreateDto implements Serializable {
 #end
 
 #if(${entitySerialVersionUID})
